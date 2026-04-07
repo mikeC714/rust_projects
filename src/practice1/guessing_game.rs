@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 
 
 fn guessing_game(){
-    loop{
+    'guessing_loop:loop{
         let secret_num = rand::thread_rng().gen_range(1..=100);
         println!("Guess a number!");
         println!("Please input a number!");
@@ -24,7 +24,7 @@ fn guessing_game(){
             Ordering::Less | Ordering::Greater => println!("Good attempt the answer was {secret_num}, not {guessed_num}"),
             Ordering::Equal => {
                 println!("Congrats you're correct the number was {guessed_num}");
-                break;
+                break 'guessing_loop;
             }
         } 
     }
