@@ -1,5 +1,5 @@
 use std::io;
-use rand::rng;
+use rand::Rng;
 
 
 fn gen_num(low: u32, high: u32) -> (Vec<String>, Vec<String>){
