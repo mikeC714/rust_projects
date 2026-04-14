@@ -61,10 +61,6 @@ fn main() -> Result<()>{
     let encrypt_pass = encrypt(&pass)?;
     let decrypted = decrypt(&encrypt_pass)?;
 
-    if pass == ""{
-
-    }
-
     admin_db.push(Admin{
          username: admin_name,
          password: encrypt_pass
