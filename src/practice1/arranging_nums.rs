@@ -10,7 +10,6 @@ fn arrange_nums(rng: &[i32]) -> (Vec<i32>, Vec<i32>, Vec<i32>){
             _ => rest_numbers.push(nums)
         }
     }
-
     return (divided_by_two, divided_by_three, rest_numbers);
 }
 

@@ -1,50 +1,23 @@
-use std::io;
-use std::io::Write;
+fn arrange_nums(rng: &[i32]) -> (Vec<i32>, Vec<i32>, Vec<i32>){
+    let mut divided_by_two: Vec<i32> = Vec::new();
+    let mut divided_by_three: Vec<i32> = Vec::new();
+    let mut rest_numbers: Vec<i32> = Vec::new();
 
-#[derive(Debug)]
-struct User{
-    index: usize,
-    name: String,
-    username: String,
-}
-
-// Creating a Type to limit how verbose Result syntax, since it's being reused
-type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
-
-fn get_input(prompt: &str) -> Result<String>{
-    println!("{}", prompt);
-
-    // Error propagation "?"  instead of using match or unwrap.
-    // Error propagation when Ok<T> returns the unwrapped value.
-    // Whereas if Err it short curcuits the function possibly crashing application.
-    io::stdout()
-        .flush()?;
-
-    let mut input: String = String::new();
-    io::stdin()
-        .read_line(&mut input)?;
-
-    return Ok(input.trim().to_string());
-}
-
-
-fn main() -> Result<()>{
-    let mut db: Vec<User> = Vec::new();
-    loop{
-        let name = get_input("Please Input Your Name.")?;
-        let username = get_input("Please Input Your Username")?; 
-
-        if name == "stop" || username == "stop"{
-            break
-        };
-
-        db.push(User{
-            index: db.len() +1,
-            name,
-            username
-        });
-
-        println!("{:#?}", db)
+    for &nums in rng{
+        match nums{
+            n if n % 2 == 0 => divided_by_two.push(n),
+            n if n % 3 == 0 => divided_by_three.push(n),
+            _ => rest_numbers.push(nums)
+        }
     }
-    Ok(())
+    return (divided_by_two, divided_by_three, rest_numbers);
+}
+
+fn main(){
+    let rng: Vec<i32> = (0..=100).collect();
+    let results = arrange_nums(&rng);
+
+    println!("{:#?}", results.0);
+    println!("{:#?}", results.1);
+    println!("{:#?}", results.2);
 }
